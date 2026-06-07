@@ -172,16 +172,23 @@
         regulation, access to data, and whether consumers are protected from unfair or opaque AI systems.
       </p>
 
-     <button>Baseline Scenario</button>
-<button>Upside Scenario</button>
-<button>Downside Scenario</button>
+  <div class="scenario-buttons">
+  <button onclick="showScenario('baseline')">Baseline Scenario</button>
+  <button onclick="showScenario('upside')">Upside Scenario</button>
+  <button onclick="showScenario('downside')">Downside Scenario</button>
+</div>
 
-<div>
-  <h3>Baseline Scenario</h3>
-  <p>
+<div id="scenario-box">
+  <h3 id="scenario-title">Baseline Scenario</h3>
+  <p id="scenario-description">
     AI adoption grows steadily but unevenly. Large agencies, property platforms, and investors gain
     the most from AI tools, while smaller agencies and ordinary consumers benefit more slowly.
   </p>
+  <ul id="scenario-points">
+    <li>Routine admin and marketing tasks become faster and cheaper.</li>
+    <li>AI valuation and search tools become common but are not always transparent.</li>
+    <li>Large firms benefit more because they have better data and technical capacity.</li>
+  </ul>
 </div>
     </section>
 
@@ -211,5 +218,52 @@
       </p>
     </section>
   </main>
+  <script>
+  const scenarios = {
+    baseline: {
+      title: "Baseline Scenario",
+      description: "AI adoption grows steadily but unevenly. Large agencies, property platforms, and investors gain the most from AI tools, while smaller agencies and ordinary consumers benefit more slowly.",
+      points: [
+        "Routine admin and marketing tasks become faster and cheaper.",
+        "AI valuation and search tools become common but are not always transparent.",
+        "Large firms benefit more because they have better data and technical capacity."
+      ]
+    },
+    upside: {
+      title: "Upside Scenario",
+      description: "AI is adopted with strong transparency, privacy protections, and consumer safeguards. AI tools reduce search costs, improve property comparison, and help buyers and renters make more informed decisions.",
+      points: [
+        "Buyers and renters gain clearer information about prices, risks, and suburb trends.",
+        "Agents use AI to reduce admin work and spend more time on advice and negotiation.",
+        "Regulation limits unfair data use and improves trust in AI-driven property tools."
+      ]
+    },
+    downside: {
+      title: "Downside Scenario",
+      description: "AI mainly strengthens large platforms, landlords, and investors. Consumers face more tracking, opaque recommendations, and information inequality in an already pressured housing market.",
+      points: [
+        "Large platforms use data advantages to shape what buyers and renters see.",
+        "AI screening and pricing tools create risks of bias or unfair exclusion.",
+        "Smaller agencies and ordinary consumers struggle to compete with better-resourced users."
+      ]
+    }
+  };
+
+  function showScenario(type) {
+    const scenario = scenarios[type];
+
+    document.getElementById("scenario-title").textContent = scenario.title;
+    document.getElementById("scenario-description").textContent = scenario.description;
+
+    const pointsList = document.getElementById("scenario-points");
+    pointsList.innerHTML = "";
+
+    scenario.points.forEach(function(point) {
+      const li = document.createElement("li");
+      li.textContent = point;
+      pointsList.appendChild(li);
+    });
+  }
+</script>
 </body>
 </html>
